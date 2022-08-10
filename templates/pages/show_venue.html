@@ -82,25 +82,6 @@
     onclick="return confirm('Are you sure you want to delete this entry?')">Delete</button>
   </form>
 </div>
-<!-- <button id="delete-button" class="btn btn-primary btn-lg">Delete</button>
 
-<script>
-  deleteBtns = document.getElementById("delete-button");
-  deleteBtns.onclick = function(e) {
-    console.log("Delete event: ", e);
-    fetch('/venues/{{venue.id}}/delete',{
-      method: 'DELETE'
-    }).then(function() {
-      console.log('Parent?', e.target);
-      const item = e.target.parentElement;
-      item.remove();
-        // document.getElementById("error").className = "hidden";
-      })
-      .catch(function(e) {
-        console.error(e);
-        // document.getElementById("error").className = "";
-      });
-  };
-</script> -->
 {% endblock %}
 

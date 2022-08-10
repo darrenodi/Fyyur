@@ -72,7 +72,10 @@
 	</div>
 </section>
 
-<a href="/artists/{{ artist.id }}/edit"><button class="btn btn-primary btn-lg">Edit</button></a>
+<div style="display:flex; gap:10px;">
+  <a href="/artists/{{ artist.id }}/edit"><button class="btn btn-primary btn-lg">Edit</button></a>
+  <a href="/artists/{{ artist.id }}/availability"><button class="btn btn-primary btn-lg">Set Availability</button></a>
+</div>
 
 {% endblock %}
 

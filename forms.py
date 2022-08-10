@@ -1,8 +1,11 @@
 from datetime import datetime
+from email import message
 from flask_wtf import Form
-from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField, BooleanField
-from wtforms.validators import DataRequired, AnyOf, URL
+from pyparsing import Regex
+from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField, BooleanField,DateTimeLocalField
+from wtforms.validators import DataRequired, AnyOf, URL,Regexp
 
+#Form with Validators
 class ShowForm(Form):
     artist_id = StringField(
         'artist_id'
@@ -83,13 +86,13 @@ class VenueForm(Form):
         'address', validators=[DataRequired()]
     )
     phone = StringField(
-        'phone'
+        'phone',
+        validators=[DataRequired(), Regexp(r'^[0-9\-\+]+$',message="Phone number can only contain numbers")]
     )
     image_link = StringField(
-        'image_link'
+        'image_link',validators=[DataRequired()]
     )
     genres = SelectMultipleField(
-        # TODO implement enum restriction
         'genres', validators=[DataRequired()],
         choices=[
             ('Alternative', 'Alternative'),
@@ -117,7 +120,7 @@ class VenueForm(Form):
         'facebook_link', validators=[URL()]
     )
     website_link = StringField(
-        'website_link'
+        'website_link',validators=[URL()]
     )
 
     seeking_talent = BooleanField( 'seeking_talent' )
@@ -192,11 +195,11 @@ class ArtistForm(Form):
         ]
     )
     phone = StringField(
-        # TODO implement validation logic for phone 
-        'phone'
+        'phone',
+        validators=[DataRequired(), Regexp(r'^[0-9\-\+]+$')]
     )
     image_link = StringField(
-        'image_link'
+        'image_link',validators=[DataRequired()]
     )
     genres = SelectMultipleField(
         'genres', validators=[DataRequired()],
@@ -228,7 +231,7 @@ class ArtistForm(Form):
      )
 
     website_link = StringField(
-        'website_link'
+        'website_link',validators=[URL()]
      )
 
     seeking_venue = BooleanField( 'seeking_venue' )
@@ -237,3 +240,8 @@ class ArtistForm(Form):
             'seeking_description'
      )
 
+class AvailabilityForm(Form):
+    artist_id = StringField('artist_id', validators=[DataRequired()])
+    start_time = DateTimeLocalField('start_time',validators=[DataRequired()],default= datetime.today()
+    )
+    
